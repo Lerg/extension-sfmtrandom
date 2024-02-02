@@ -1,0 +1,338 @@
+- name: sfmtrandom
+  type: table
+  desc: SFMT Random Extension
+
+  members:
+
+  - name: init_gen_rand
+    type: function
+    desc: Initializes the internal state array with a UINT32 integer seed.
+
+    parameters:
+      - name: seed
+        type: number
+        desc: UINT32 seed number.
+
+    return:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+  - name: init_by_array
+    type: function
+    desc: Initializes the internal state array with an array of UINT32 integers used as a seed.
+
+    parameters:
+      - name: array
+        type: table
+        desc: The array of a UINT32 integers used as a seed.
+
+    return:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+  - name: get_idstring
+    type: function
+    desc: Returns the identification string. The string shows the word size, the Mersenne exponent and all the parameters of this generator.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: identification
+        type: string
+        desc: Identification string.
+
+  - name: get_min_array_size32
+    type: function
+    desc: Returns the minimum size of an array used for the fill_array32() function.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: size
+        type: number
+        desc: Size.
+
+  - name: get_min_array_size64
+    type: function
+    desc: Returns the minimum size of an array used for the fill_array64() function.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: size
+        type: number
+        desc: Size.
+
+  - name: fill_array32
+    type: function
+    desc: Generates pseudorandom UINT32 integers in the specified array buffer.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+      - name: array
+        type: buffer
+        desc: A buffer created with a stream named "array" of type buffer.VALUE_TYPE_UINT32 where pseudorandom UINT32 integers are filled by this function.
+
+  - name: fill_array64
+    type: function
+    desc: Generates pseudorandom UINT64 integers in the specified array buffer.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+      - name: array
+        type: buffer
+        desc: A buffer created with a stream named "array" of type buffer.VALUE_TYPE_UINT64 where pseudorandom UINT64 integers are filled by this function.
+
+  - name: genrand_uint32
+    type: function
+    desc: Generates a UINT32 pseudorandom number.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: UINT32 random value.
+
+  - name: genrand_uint64
+    type: function
+    desc: Generates a UINT64 pseudorandom number. The function genrand_uint64() should not be called after genrand_uint32() unless an new initialization is performed.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: string
+        desc: UINT64 random value represented as an 8 character long string - memory representation of a UINT64 number.
+
+  - name: genrand_real1
+    type: function
+    desc: Generates a random number on [0,1]-real-interval.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: genrand_real2
+    type: function
+    desc: Generates a random number on [0,1)-real-interval.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: genrand_real3
+    type: function
+    desc: Generates a random number on (0,1)-real-interval.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: genrand_res53
+    type: function
+    desc: Generates a random number on [0,1)-real-interval with 53-bit resolution using a 64-bit integer.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: genrand_res53_mix
+    type: function
+    desc: Generates a random number on [0,1)-real-interval with 53-bit resolution using two 32bit integers.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: d4
+    type: function
+    desc: Generates a random integer on [1,4] interval like from a dice.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: d6
+    type: function
+    desc: Generates a random integer on [1,6] interval like from a dice.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: d8
+    type: function
+    desc: Generates a random integer on [1,8] interval like from a dice.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: d10
+    type: function
+    desc: Generates a random integer on [1,10] interval like from a dice.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: d12
+    type: function
+    desc: Generates a random integer on [1,12] interval like from a dice.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: d20
+    type: function
+    desc: Generates a random integer on [1,20] interval like from a dice.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: toss
+    type: function
+    desc: Generates a random integer on [0,1] interval like from a toss of a coin.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: card
+    type: function
+    desc: Generates a random integer on [1,52] interval like picking a random card from a standard deck.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: value
+        type: number
+        desc: Random value.
+
+  - name: card2
+    type: function
+    desc: Generates two random integers on [1,4] and [1,13] intervals like picking a random card suit and a random card from a suit.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+    return:
+      - name: suit
+        type: number
+        desc: Random suit [1,4].
+
+      - name: card
+        type: number
+        desc: Random card [1,13].
+
+  - name: delete
+    type: function
+    desc: Deletes the random generator and frees the alocated memory for it.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
