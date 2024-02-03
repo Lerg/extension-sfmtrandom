@@ -213,6 +213,14 @@ Generates two random integers on [1,4] and [1,13] intervals like picking a rando
 - return: `suit`: _number_ Random suit [1,4], `card`: _number_ Random card [1,13].
 
 ---
+### sfmtrandom.shuffle(`sfmt`: _lightuserdata_, `array`: _table_)
+
+Shuffles the provided array in place.
+
+- `sfmt`: _lightuserdata_ SFMT internal state.
+- `array`: _table_ The array of values.
+
+---
 ### sfmtrandom.delete(`sfmt`: _lightuserdata_)
 
 Deletes the random generator and frees the alocated memory for it.
