@@ -328,6 +328,19 @@
         type: number
         desc: Random card [1,13].
 
+  - name: shuffle
+    type: function
+    desc: Shuffles the provided array in place.
+
+    parameters:
+      - name: sfmt
+        type: lightuserdata
+        desc: SFMT internal state.
+
+      - name: array
+        type: table
+        desc: The array of values.
+
   - name: delete
     type: function
     desc: Deletes the random generator and frees the alocated memory for it.

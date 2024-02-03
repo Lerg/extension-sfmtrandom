@@ -56,7 +56,7 @@ static int lua_init_gen_rand(lua_State *L) {
 static int lua_init_by_array(lua_State *L) {
 	int array_index = 1;
 	if (is_table(L, array_index, "array")) {
-		int key_length = lua_objlen(L, array_index);
+		size_t key_length = lua_objlen(L, array_index);
 		if (key_length > 0) {
 			uint32_t init_key[key_length];
 			bool success;
@@ -195,8 +195,7 @@ static int lua_genrand_uint64(lua_State *L) {
 	if (sfmt != nullptr) {
 		uint64_t value = sfmt_genrand_uint64(sfmt);
 		uint8_t buffer[8];
-		int i;
-		for (i = 0; i < 8; ++i) {
+		for (int i = 0; i < 8; ++i) {
 			buffer[i] = (value >> (i * 8)) & 0xff;
 		}
 		lua_pushlstring(L, (const char *)buffer, 8);
@@ -332,6 +331,32 @@ static int lua_card2(lua_State *L) {
 	return 0;
 }
 
+static int lua_shuffle(lua_State *L) {
+	sfmt_t *sfmt = get_sfmt_lightuserda(L);
+	if (sfmt != nullptr) {
+		const int array_index = 2;
+		if (is_table(L, array_index, "array")) {
+			size_t array_size = lua_objlen(L, array_index);
+			if (array_size > 0) {
+				for (size_t i = array_size; i > 1; --i) {
+					uint64_t j = (uint64_t)floor(i * sfmt_genrand_real2(sfmt)) + 1;
+
+					lua_rawgeti(L, array_index, i);
+					int value_i = luaL_ref(L, LUA_REGISTRYINDEX);
+					lua_rawgeti(L, array_index, j);
+
+					lua_rawseti(L, array_index, i);
+					lua_getref(L, value_i);
+					lua_rawseti(L, array_index, j);
+
+					luaL_unref(L, LUA_REGISTRYINDEX, value_i);
+				}
+			}
+		}
+	}
+	return 0;
+}
+
 // Delete the random generator and free the alocated memory for it.
 static int lua_delete(lua_State *L) {
 	sfmt_t *sfmt = get_sfmt_lightuserda(L);
@@ -365,6 +390,7 @@ static const luaL_reg lua_functions[] = {
 	{"toss", lua_toss},
 	{"card", lua_card},
 	{"card2", lua_card2},
+	{"shuffle", lua_shuffle},
 	{"delete", lua_delete},
 	{0, 0}
 };

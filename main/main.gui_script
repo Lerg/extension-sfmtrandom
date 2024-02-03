@@ -143,6 +143,19 @@ local function test_array2_pressed(self)
 	end
 end
 
+local function test3_pressed(self)
+	log('test3_pressed')
+	local array = {}
+	for i = 1, 52 do
+		array[i] = i
+	end
+	sfmtrandom.shuffle(sfmt, array)
+	log(table.concat(array, ',', 1, 26))
+	log(table.concat(array, ',', 27, 52))
+	is_fresh = false
+	is_32 = true
+end
+
 local function delete_pressed(self)
 	log('delete_pressed')
 	sfmtrandom.delete(sfmt)
@@ -191,6 +204,7 @@ local buttons = {
 	btn_test2 = test2_pressed,
 	btn_test_array1 = test_array1_pressed,
 	btn_test_array2 = test_array2_pressed,
+	btn_test3 = test3_pressed,
 	btn_delete = delete_pressed,
 	btn_logs = logs_pressed
 }
