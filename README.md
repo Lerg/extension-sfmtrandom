@@ -12,12 +12,10 @@ SFMT is much faster than MT, in most platforms. Not only the speed, but also the
 
 The following implementation SFMT19937 can be compiled in three possible platforms:
 
-Standard C without SIMD instructions
-CPUs with Intel's SSE2 instructions + C compiler which supports these feature
-CPUs with PowerPC's AltiVec instructions + C compiler which supports these feature
+- Standard C without SIMD instructions
+- CPUs with Intel's SSE2 instructions + C compiler which supports these feature
+- CPUs with PowerPC's AltiVec instructions + C compiler which supports these feature
 In each platform, SFMT has better performance than MT.
-
-We put tables of equidistribution of SFMT. They are 32bit and 64bit.
 
 # Setup
 
